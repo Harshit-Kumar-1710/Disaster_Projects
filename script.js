@@ -58,7 +58,11 @@ function generateDemoCity() {
         { id: 'railwayStation', name: 'Railway Station', lat: 30.3185, lng: 78.0327, isSafe: true, dangerLevel: 1 },
         { id: 'forestInstitute', name: 'Forest Research Institute', lat: 30.3418, lng: 77.9994, isSafe: true, dangerLevel: 0 },
         { id: 'pacificMall', name: 'Pacific Mall', lat: 30.3164, lng: 78.0321, isSafe: false, dangerLevel: 5 },
-        { id: 'fireStation', name: 'Fire Station', lat: 30.3234, lng: 78.0359, isSafe: true, dangerLevel: 0 }
+        { id: 'fireStation', name: 'Fire Station', lat: 30.3234, lng: 78.0359, isSafe: true, dangerLevel: 0 },
+        { id: 'policeHQ', name: 'Police Headquarters', lat: 30.3247, lng: 78.0389, isSafe: true, dangerLevel: 1 },
+        { id: 'isbt', name: 'ISBT Dehradun', lat: 30.2877, lng: 78.0318, isSafe: true, dangerLevel: 1 },
+        { id: 'maxHospital', name: 'Max Hospital', lat: 30.3382, lng: 78.0685, isSafe: true, dangerLevel: 0 },
+        { id: 'doonUniversity', name: 'Doon University', lat: 30.3184, lng: 78.0463, isSafe: true, dangerLevel: 0 }
     ];
 
     locations.forEach(loc => graph.addNode(loc.id, loc));
@@ -70,7 +74,11 @@ function generateDemoCity() {
         ['pacificMall', 'railwayStation', 600, 2],
         ['railwayStation', 'fireStation', 1200, 1],
         ['fireStation', 'forestInstitute', 2000, 2],
-        ['forestInstitute', 'clockTower', 2500, 3]
+        ['forestInstitute', 'clockTower', 2500, 3],
+        ['policeHQ', 'clockTower', 800, 2],
+        ['isbt', 'railwayStation', 2000, 2],
+        ['maxHospital', 'doonHospital', 1500, 1],
+        ['doonUniversity', 'pacificMall', 1000, 2]
     ];
 
     edges.forEach(([from, to, weight, dangerLevel]) => {
