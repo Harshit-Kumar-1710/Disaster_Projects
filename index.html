@@ -1,16 +1,157 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-    crossorigin=""/>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Safescape - Smart Disaster Evacuation System</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
+                </svg>
+                <span>Safescape</span>
+            </div>
+            <div class="nav-links">
+                <a href="#" id="loginBtn">Login</a>
+                <a href="#" id="signupBtn" class="btn-primary">Sign Up</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Landing Page -->
+        <section id="landing" class="landing-section">
+            <div class="hero">
+                <div class="hero-content">
+                    <span class="badge">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
+                        </svg>
+                        Intelligent Evacuation System
+                    </span>
+                    <h1>Find the Safest Path in Times of Disaster</h1>
+                    <p>Safescape uses advanced algorithms to provide the safest and shortest evacuation routes during emergencies.</p>
+                    <button class="btn-primary" id="getStartedBtn">Get Started</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Auth Forms -->
+        <section id="authForms" class="auth-section hidden">
+            <div class="auth-container">
+                <div id="loginForm" class="auth-form hidden">
+                    <h2>Sign in to Safescape</h2>
+                    <form>
+                        <div class="form-group">
+                            <label for="loginEmail">Email</label>
+                            <input type="email" id="loginEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">Password</label>
+                            <input type="password" id="loginPassword" required>
+                        </div>
+                        <button type="submit" class="btn-primary">Sign In</button>
+                    </form>
+                </div>
+
+                <div id="signupForm" class="auth-form hidden">
+                    <h2>Create your account</h2>
+                    <form>
+                        <div class="form-group">
+                            <label for="signupName">Name</label>
+                            <input type="text" id="signupName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signupEmail">Email</label>
+                            <input type="email" id="signupEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signupPassword">Password</label>
+                            <input type="password" id="signupPassword" required>
+                        </div>
+                        <button type="submit" class="btn-primary">Sign Up</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard -->
+        <section id="dashboard" class="dashboard-section hidden">
+            <div class="dashboard-container">
+                <h2>Welcome, <span id="userName">User</span>!</h2>
+                <div class="dashboard-cards">
+                    <div class="card" id="addLocationCard">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 8v8M8 12h8"/>
+                        </svg>
+                        <h3>Add Location</h3>
+                        <p>Add and manage your locations</p>
+                    </div>
+                    <div class="card" id="sosCard">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0"/>
+                            <line x1="12" y1="9" x2="12" y2="13"/>
+                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                        <h3>SOS</h3>
+                        <p>Find evacuation route</p>
+                    </div>
+                    <div class="card" id="checkSafetyCard">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                        <h3>Check Safety</h3>
+                        <p>Verify location safety</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Map Section -->
+        <section id="mapSection" class="map-section hidden">
+            <div class="map-container">
+                <div id="map"></div>
+                <div class="map-controls">
+                    <button id="backBtn" class="btn-secondary">Back</button>
+                    <button id="confirmLocationBtn" class="btn-primary hidden">Confirm Location</button>
+                    <button id="findRouteBtn" class="btn-primary hidden">Find Safe Route</button>
+                    <button id="checkSafetyBtn" class="btn-primary hidden">Check Safety</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
+                </svg>
+                <span>Safescape</span>
+            </div>
+            <div class="emergency-contacts">
+                <h3>Emergency Contacts</h3>
+                <ul>
+                    <li>Emergency: 112</li>
+                    <li>Police: 100</li>
+                    <li>Fire: 101</li>
+                    <li>Ambulance: 108</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Safescape. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
 </html>
